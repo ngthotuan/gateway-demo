@@ -1,0 +1,19 @@
+server:
+  port: 8111
+spring:
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: r1
+            uri: https://example.org
+            filters:
+              - AddResponseHeader=X-Response-Red, Blue
+            predicates:
+              - Path=/test
+          - id: r2
+            uri: https://example.org
+            filters:
+              - instrument=x-request,x-response
+            predicates:
+              - Path=/test2
